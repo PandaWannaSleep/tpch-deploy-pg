@@ -11,10 +11,11 @@ DATA_DIR="$1"
 USERNAME="$2"
 
 # 数据库名称
-DB_NAME="tpch_copy"
+DB_NAME="tpch"
 
 # 检查数据库是否已经存在
 DB_EXISTS=$(psql -t -c "SELECT 1 FROM pg_database WHERE datname = '$DB_NAME';" | tr -d '[:space:]')
+
 echo "数据库 $DB_NAME 是否存在: $DB_EXISTS"
 if [ "$DB_EXISTS" = "1" ]; then
     echo "数据库 $DB_NAME 已经存在，脚本退出。"
@@ -62,4 +63,4 @@ BEGIN
 END \$\$;
 EOF
 
-echo "TPCH 负载已成功载入 $DB_NAME 数据库，并为用户 $USERNAME 赋予了相应权限。"
+echo "done"
