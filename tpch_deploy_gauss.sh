@@ -2,7 +2,7 @@
 
 # 检查用户是否提供了足够的参数
 if [ $# -ne 2 ]; then
-    echo "用法: $0 <数据和SQL文件的父目录> <被赋予权限的数据库用户>"
+    echo "用法: $0 <数据和SQL文件的父目录（绝对路径）> <被赋予权限的数据库用户>"
     exit 1
 fi
 
@@ -11,10 +11,10 @@ DATA_DIR="$1"
 USERNAME="$2"
 
 # 数据库名称
-DB_NAME="tpch"
+DB_NAME="tpch_copy"
 
 # 检查数据库是否已经存在
-DB_EXISTS=$(gsql -t -c "SELECT 1 FROM pg_database WHERE datname = '$DB_NAME';" | tr -d '[:space:]')
+DB_EXISTS=$(gsql -d postgres -t -c "SELECT 1 FROM pg_database WHERE datname = '$DB_NAME';" | tr -d '[:space:]')
 
 echo "数据库 $DB_NAME 是否存在: $DB_EXISTS"
 if [ "$DB_EXISTS" = "1" ]; then
@@ -23,7 +23,7 @@ if [ "$DB_EXISTS" = "1" ]; then
 fi
 
 # 创建数据库
-gsql -c "CREATE DATABASE $DB_NAME;"
+gsql -d postgres -c "CREATE DATABASE $DB_NAME;"
 
 # 连接到新创建的数据库
 gsql -d $DB_NAME << EOF

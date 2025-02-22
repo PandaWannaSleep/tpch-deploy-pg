@@ -1,6 +1,6 @@
 # tpch-deploy-pg
 
-快捷自动化部署tpch数据至postgres
+快捷自动化部署tpch数据至postgres或者opengauss
 
 ## 使用方法
 
@@ -14,19 +14,19 @@
    su - postgres
    ```
 
-3. 在本项目根目录下执行tpch_deploy.sh脚本
+3. 在本项目根目录下执行tpch_deploy_pg.sh脚本，向postgres中导入数据。执行tpch_deploy_gauss.sh脚本，向opengauss中导入数据。
 
    ```bash
-   bash tpch_deploy.sh <数据和SQL文件的父目录> <被赋予权限的数据库用户>
+   bash tpch_deploy_pg.sh <数据和SQL文件的父目录> <被赋予权限的数据库用户>
    ```
 
-   - <数据和SQL文件的父目录>：生成的tbl文件和dss.sql及dss_ri.sql所在目录
+   - <数据和SQL文件的父目录>：生成的tbl文件和dss.sql及dss_ri.sql所在目录绝对路径
    - <被赋予权限的数据库用户>：赋予创建的数据库、表的权限给指定用户
 
    e.g.
 
    ```bash
-   bash tpch_deploy.sh ./data postgres
+   bash tpch_deploy_pg.sh /home/omm/tpch-deploy-pg/data postgres
    ```
 
    
