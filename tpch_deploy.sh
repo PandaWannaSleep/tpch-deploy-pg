@@ -14,7 +14,7 @@ USERNAME="$2"
 DB_NAME="tpch"
 
 # 检查数据库是否已经存在
-DB_EXISTS=$(psql -t -c "SELECT 1 FROM pg_database WHERE datname = '$DB_NAME';" | tr -d '[:space:]')
+DB_EXISTS=$(gsql -t -c "SELECT 1 FROM pg_database WHERE datname = '$DB_NAME';" | tr -d '[:space:]')
 
 echo "数据库 $DB_NAME 是否存在: $DB_EXISTS"
 if [ "$DB_EXISTS" = "1" ]; then
@@ -23,10 +23,10 @@ if [ "$DB_EXISTS" = "1" ]; then
 fi
 
 # 创建数据库
-psql -c "CREATE DATABASE $DB_NAME;"
+gsql -c "CREATE DATABASE $DB_NAME;"
 
 # 连接到新创建的数据库
-psql -d $DB_NAME << EOF
+gsql -d $DB_NAME << EOF
 -- 创建表
 \i $DATA_DIR/dss.sql
 
