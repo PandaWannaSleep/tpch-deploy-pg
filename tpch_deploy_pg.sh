@@ -11,7 +11,7 @@ DATA_DIR="$1"
 USERNAME="$2"
 
 # 数据库名称
-DB_NAME="tpch_copy"
+DB_NAME="tpch"
 
 # 检查数据库是否已经存在
 DB_EXISTS=$(gsql -d postgres -t -c "SELECT 1 FROM pg_database WHERE datname = '$DB_NAME';" | tr -d '[:space:]')
